@@ -70,7 +70,6 @@ export default {
 		replace({
 			preventAssignment: true,
 			_CONSTANTS_: JSON.stringify({
-				HOST_APP: process.env.HOST_APP,
 				HOST_API: process.env.HOST_API,
 				BRAND: process.env.BRAND,
 			})
