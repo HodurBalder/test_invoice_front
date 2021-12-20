@@ -11,7 +11,8 @@ export default {
     getUsersAgreement,
     recoveryUser,
     recoveryHash,
-    userSignup
+    userSignup,
+    verifyToken
 }
 
 
@@ -107,6 +108,19 @@ function recoveryHash(hash, data) {
         Superagent
             .post(`${HOST_API}/users/recovery/${hash}`)
             .send(data)
+            .end((err, res) => {
+                resolve(res.body)
+            })
+    })
+}
+
+function verifyToken(token) {
+    return new Promise((resolve, reject) => {
+
+        Superagent
+            .get(`${ HOST_API }/sessions/token/${ token }`)
+            .timeout({deadline: 20000, response: 20000})
+            .set('token', token)
             .end((err, res) => {
                 resolve(res.body)
             })
